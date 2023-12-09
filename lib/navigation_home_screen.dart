@@ -1,3 +1,4 @@
+import 'package:best_flutter_ui_templates/Report_screen.dart';
 import 'package:best_flutter_ui_templates/app_theme.dart';
 import 'package:best_flutter_ui_templates/custom_drawer/drawer_user_controller.dart';
 import 'package:best_flutter_ui_templates/custom_drawer/home_drawer.dart';
@@ -69,6 +70,16 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
         case DrawerIndex.Invite:
           setState(() {
             screenView = InviteFriend();
+          });
+          break;
+        case DrawerIndex.Report:
+          setState(() {
+            screenView = ReportScreen();
+          });
+          break;
+        case DrawerIndex.FeedBack:
+          setState(() {
+            screenView = FeedbackScreen();
           });
           break;
         default:

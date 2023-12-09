@@ -23,6 +23,8 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
   final ScrollController scrollController = ScrollController();
   double topBarOpacity = 0.0;
 
+  double fem = 1.0;
+
   @override
   void initState() {
     topBarAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -217,7 +219,10 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
               opacity: topBarAnimation!,
               child: Transform(
                 transform: Matrix4.translationValues(
-                    0.0, 30 * (1.0 - topBarAnimation!.value), 0.0),
+                  0.0,
+                  30 * (1.0 - topBarAnimation!.value),
+                  0.0,
+                ),
                 child: Container(
                   decoration: BoxDecoration(
                     color: FitnessAppTheme.white.withOpacity(topBarOpacity),
@@ -226,10 +231,11 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
                     ),
                     boxShadow: <BoxShadow>[
                       BoxShadow(
-                          color: FitnessAppTheme.grey
-                              .withOpacity(0.4 * topBarOpacity),
-                          offset: const Offset(1.1, 1.1),
-                          blurRadius: 10.0),
+                        color: FitnessAppTheme.grey
+                            .withOpacity(0.4 * topBarOpacity),
+                        offset: const Offset(1.1, 1.1),
+                        blurRadius: 10.0,
+                      ),
                     ],
                   ),
                   child: Column(
@@ -239,18 +245,38 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
                       ),
                       Padding(
                         padding: EdgeInsets.only(
-                            left: 16,
-                            right: 16,
-                            top: 16 - 8.0 * topBarOpacity,
-                            bottom: 12 - 8.0 * topBarOpacity),
+                          left: 16,
+                          right: 16,
+                          top: 16 - 8.0 * topBarOpacity,
+                          bottom: 12 - 8.0 * topBarOpacity,
+                        ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
+                            Positioned(
+                              left: 8,
+                              top: 18 * fem,
+                              child: Align(
+                                child: SizedBox(
+                                  width: 46 * fem,
+                                  height: 42 * fem,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Image.asset(
+                                      'assets/page-1/images/back-MGZ.png',
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                             Expanded(
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'Physical Health',
+                                  'Health',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontFamily: FitnessAppTheme.fontName,
@@ -268,11 +294,14 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
                               child: InkWell(
                                 highlightColor: Colors.transparent,
                                 borderRadius: const BorderRadius.all(
-                                    Radius.circular(32.0)),
-                                onTap: () {},
+                                  Radius.circular(32.0),
+                                ),
+                                onTap: () {
+                                  Navigator.of(context).pop();
+                                },
                                 child: Center(
                                   child: Icon(
-                                    Icons.keyboard_arrow_left,
+                                    Icons.arrow_back,
                                     color: FitnessAppTheme.grey,
                                   ),
                                 ),
@@ -294,7 +323,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
                                     ),
                                   ),
                                   Text(
-                                    '15 May',
+                                    '15 Nov',
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                       fontFamily: FitnessAppTheme.fontName,
@@ -313,7 +342,8 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
                               child: InkWell(
                                 highlightColor: Colors.transparent,
                                 borderRadius: const BorderRadius.all(
-                                    Radius.circular(32.0)),
+                                  Radius.circular(32.0),
+                                ),
                                 onTap: () {},
                                 child: Center(
                                   child: Icon(
@@ -332,7 +362,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
               ),
             );
           },
-        )
+        ),
       ],
     );
   }

@@ -49,9 +49,9 @@ class _HomeDrawerState extends State<HomeDrawer> {
         icon: Icon(Icons.group),
       ),
       DrawerList(
-        index: DrawerIndex.Share,
-        labelName: 'Rate the app',
-        icon: Icon(Icons.share),
+        index: DrawerIndex.Report,
+        labelName: 'Report',
+        icon: Icon(Icons.report),
       ),
       DrawerList(
         index: DrawerIndex.About,
@@ -206,17 +206,17 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   Container(
                     width: 6.0,
                     height: 46.0,
-                    // decoration: BoxDecoration(
-                    //   color: widget.screenIndex == listData.index
-                    //       ? Colors.blue
-                    //       : Colors.transparent,
-                    //   borderRadius: new BorderRadius.only(
-                    //     topLeft: Radius.circular(0),
-                    //     topRight: Radius.circular(16),
-                    //     bottomLeft: Radius.circular(0),
-                    //     bottomRight: Radius.circular(16),
-                    //   ),
-                    // ),
+                    decoration: BoxDecoration(
+                      color: widget.screenIndex == listData.index
+                          ? Colors.blue
+                          : Colors.transparent,
+                      borderRadius: new BorderRadius.only(
+                        topLeft: Radius.circular(0),
+                        topRight: Radius.circular(16),
+                        bottomLeft: Radius.circular(0),
+                        bottomRight: Radius.circular(16),
+                      ),
+                    ),
                   ),
                   const Padding(
                     padding: EdgeInsets.all(4.0),
@@ -299,10 +299,10 @@ enum DrawerIndex {
   HOME,
   FeedBack,
   Help,
-  Share,
+  Report,
   About,
   Invite,
-  Testing,
+  Test,
 }
 
 class DrawerList {

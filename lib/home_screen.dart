@@ -202,14 +202,18 @@ class HomeListView extends StatelessWidget {
             child: AspectRatio(
               aspectRatio: 1.5,
               child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(4.0)),
+                borderRadius: const BorderRadius.all(Radius.circular(9.0)),
                 child: Stack(
                   alignment: AlignmentDirectional.center,
                   children: <Widget>[
                     Positioned.fill(
-                      child: Image.asset(
-                        listData!.imagePath,
-                        fit: BoxFit.cover,
+                      child: Container(
+                        width: 90, // Set your desired width
+                        height: 90, // Set your desired height
+                        child: Image.asset(
+                          listData!.imagePath,
+                          fit: BoxFit.fitWidth, // or BoxFit.fitHeight
+                        ),
                       ),
                     ),
                     Material(

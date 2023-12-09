@@ -1,5 +1,6 @@
+import 'package:best_flutter_ui_templates/Journal_app/feature-journal.dart';
+import 'package:best_flutter_ui_templates/TaskMinder_App/feature-to-do-day-mode.dart';
 import 'package:best_flutter_ui_templates/fitness_app/fitness_app_home_screen.dart';
-import 'package:best_flutter_ui_templates/introduction_animation/introduction_animation_screen.dart';
 import 'package:flutter/widgets.dart';
 
 class HomeList {
@@ -13,12 +14,16 @@ class HomeList {
 
   static List<HomeList> homeList = [
     HomeList(
-      imagePath: 'assets/introduction_animation/introduction_animation.png',
-      navigateScreen: IntroductionAnimationScreen(),
+      imagePath: 'assets/Home-list-image/Journal-bg.png',
+      navigateScreen: JournalAppHomeScreen(),
     ),
     HomeList(
-      imagePath: 'assets/fitness_app/fitness_app.png',
+      imagePath: 'assets/Home-list-image/Fitness-bg.png',
       navigateScreen: FitnessAppHomeScreen(),
+    ),
+    HomeList(
+      imagePath: 'assets/Home-list-image/TaskMinder-bg.png',
+      navigateScreen: TaskminderAppHomeScreen(),
     ),
   ];
 }
