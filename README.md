@@ -1,4 +1,4 @@
-# LETSS GOOOO
+# A NOTE TAKING APP BY NOTED INC,
 
 A new Flutter project.
 
@@ -15,6 +15,9 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 # NOTED-APP
+<<<<<<< HEAD
 # NOTED-APP
 # NOTED-APP
 # NOTED-APP
+=======
+>>>>>>> 6fda3b32cb744e645d677c5d53127b08d0737355
