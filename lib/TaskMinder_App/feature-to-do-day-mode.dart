@@ -430,7 +430,7 @@ class _TaskminderAppHomeScreenState extends State<TaskminderAppHomeScreen> {
               onPressed: () {
                 if (descriptionController.text.isNotEmpty) {
                   tasks.add(Task(
-                    title: 'YOUR TASK',
+                    title: 'YOURS TASK',
                     description: descriptionController.text,
                   ));
                   descriptionController.clear();
