@@ -1,6 +1,6 @@
-import 'package:best_flutter_ui_templates/Journal_app/feature-journal.dart';
-import 'package:best_flutter_ui_templates/TaskMinder_App/feature-to-do-day-mode.dart';
-import 'package:best_flutter_ui_templates/fitness_app/fitness_app_home_screen.dart';
+import 'package:Noted_Inc/Journal_app/feature-journal.dart';
+import 'package:Noted_Inc/TaskMinder_App/feature-to-do-day-mode.dart';
+import 'package:Noted_Inc/fitness_app/fitness_app_home_screen.dart';
 import 'package:flutter/widgets.dart';
 
 class HomeList {

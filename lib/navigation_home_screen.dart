@@ -1,11 +1,11 @@
-import 'package:best_flutter_ui_templates/Report_screen.dart';
-import 'package:best_flutter_ui_templates/app_theme.dart';
-import 'package:best_flutter_ui_templates/custom_drawer/drawer_user_controller.dart';
-import 'package:best_flutter_ui_templates/custom_drawer/home_drawer.dart';
-import 'package:best_flutter_ui_templates/feedback_screen.dart';
-import 'package:best_flutter_ui_templates/help_screen.dart';
-import 'package:best_flutter_ui_templates/home_screen.dart';
-import 'package:best_flutter_ui_templates/invite_friend_screen.dart';
+import 'package:Noted_Inc/Report_screen.dart';
+import 'package:Noted_Inc/app_theme.dart';
+import 'package:Noted_Inc/custom_drawer/drawer_user_controller.dart';
+import 'package:Noted_Inc/custom_drawer/home_drawer.dart';
+import 'package:Noted_Inc/feedback_screen.dart';
+import 'package:Noted_Inc/help_screen.dart';
+import 'package:Noted_Inc/home_screen.dart';
+import 'package:Noted_Inc/invite_friend_screen.dart';
 import 'package:flutter/material.dart';
 
 class NavigationHomeScreen extends StatefulWidget {

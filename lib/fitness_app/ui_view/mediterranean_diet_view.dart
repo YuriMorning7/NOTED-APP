@@ -1,5 +1,5 @@
-import 'package:best_flutter_ui_templates/fitness_app/fitness_app_theme.dart';
-import 'package:best_flutter_ui_templates/main.dart';
+import 'package:Noted_Inc/fitness_app/fitness_app_theme.dart';
+import 'package:Noted_Inc/main.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -380,7 +380,8 @@ class MediterranesnDietView extends StatelessWidget {
                                     child: Row(
                                       children: <Widget>[
                                         Container(
-                                          width: ((70 / 1.2) * animation!.value),
+                                          width:
+                                              ((70 / 1.2) * animation!.value),
                                           height: 4,
                                           decoration: BoxDecoration(
                                             gradient: LinearGradient(colors: [

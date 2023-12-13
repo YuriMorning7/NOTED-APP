@@ -1,11 +1,12 @@
-import 'package:best_flutter_ui_templates/fitness_app/fitness_app_theme.dart';
+import 'package:Noted_Inc/fitness_app/fitness_app_theme.dart';
 import 'package:flutter/material.dart';
 
 class BodyMeasurementView extends StatelessWidget {
   final AnimationController? animationController;
   final Animation<double>? animation;
 
-  const BodyMeasurementView({Key? key, this.animationController, this.animation})
+  const BodyMeasurementView(
+      {Key? key, this.animationController, this.animation})
       : super(key: key);
 
   @override

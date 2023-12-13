@@ -1,11 +1,11 @@
-import 'package:best_flutter_ui_templates/Forms/noted-sign-in-page.dart';
-import 'package:best_flutter_ui_templates/introduction_animation/components/care_view.dart';
-import 'package:best_flutter_ui_templates/introduction_animation/components/center_next_button.dart';
-import 'package:best_flutter_ui_templates/introduction_animation/components/mood_diary_vew.dart';
-import 'package:best_flutter_ui_templates/introduction_animation/components/relax_view.dart';
-import 'package:best_flutter_ui_templates/introduction_animation/components/splash_view.dart';
-import 'package:best_flutter_ui_templates/introduction_animation/components/top_back_skip_view.dart';
-import 'package:best_flutter_ui_templates/introduction_animation/components/welcome_view.dart';
+import 'package:Noted_Inc/Forms/noted-sign-in-page.dart';
+import 'package:Noted_Inc/introduction_animation/components/care_view.dart';
+import 'package:Noted_Inc/introduction_animation/components/center_next_button.dart';
+import 'package:Noted_Inc/introduction_animation/components/mood_diary_vew.dart';
+import 'package:Noted_Inc/introduction_animation/components/relax_view.dart';
+import 'package:Noted_Inc/introduction_animation/components/splash_view.dart';
+import 'package:Noted_Inc/introduction_animation/components/top_back_skip_view.dart';
+import 'package:Noted_Inc/introduction_animation/components/welcome_view.dart';
 import 'package:flutter/material.dart';
 
 class IntroductionAnimationScreen extends StatefulWidget {

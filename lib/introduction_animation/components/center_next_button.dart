@@ -1,5 +1,6 @@
+import 'package:Noted_Inc/Forms/noted-login-page.dart';
 import 'package:animations/animations.dart';
-import 'package:best_flutter_ui_templates/Forms/noted-login-page.dart';
+
 import 'package:flutter/material.dart';
 
 class CenterNextButton extends StatelessWidget {

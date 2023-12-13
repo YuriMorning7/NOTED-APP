@@ -1,643 +1,315 @@
 import 'package:flutter/material.dart';
-import 'utils.dart';
+import 'package:intl/intl.dart';
 
-class JournalAppHomeScreen extends StatelessWidget {
+class JournalAppHomeScreen extends StatefulWidget {
+  @override
+  _JournalAppHomeScreenState createState() => _JournalAppHomeScreenState();
+}
+
+class _JournalAppHomeScreenState extends State<JournalAppHomeScreen> {
+  DateTime? selectedDate = DateTime.now();
+  TextEditingController noteController = TextEditingController();
+  Map<DateTime, JournalEntry> journalEntriesMap = {};
+  String? selectedEmoji; // Change IconData? to String?
+
   @override
   Widget build(BuildContext context) {
     double baseWidth = 430;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
 
-    return Container(
-      width: double.infinity,
-      child: Container(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xfff5ebe2),
+        elevation: 0,
+        iconTheme: IconThemeData(color: Colors.black),
+      ),
+      body: Container(
         width: double.infinity,
-        height: 932 * fem,
+        height: double.infinity,
         decoration: BoxDecoration(
           color: Color(0xfff5ebe2),
         ),
         child: Stack(
           children: [
+            // Journal Entries Section
             Positioned(
-              // catliesonopenbooksieh (24:92)
-              left: 235.8290405273 * fem,
+              left: 20 * fem,
               top: 0 * fem,
               child: Align(
                 child: SizedBox(
-                  width: 259.94 * fem,
-                  height: 264.6 * fem,
-                  child: Image.asset(
-                    'assets/page-1/images/cat-lies-on-open-books.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              left: 19 * fem,
-              top: 61 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 225 * fem,
-                  height: 54 * fem,
-                  child: Draggable(
-                    feedback:
-                        Text('Your Journal'), // Create feedback during drag
-                    child: Text(
-                      'Your Journal',
-                      style: SafeGoogleFont(
-                        'Poppins',
-                        fontSize: 36 * ffem,
-                        fontWeight: FontWeight.w400,
-                        height: 1.5 * ffem / fem,
-                        color: Color(0xff585a79),
-                        decoration: TextDecoration.none, // Remove underline
+                  width: 380 * fem,
+                  height: 300 * fem,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Your Journal',
+                            style: TextStyle(
+                              fontSize: 34 * ffem,
+                              fontWeight: FontWeight.w700,
+                              color: Color(0xff585A79),
+                            ),
+                          ),
+                          Container(
+                            width: 150,
+                            height: 90,
+                            child: Image.asset(
+                              'assets/page-1/images/cat-lies-on-open-books.png',
+                              width: 150,
+                              height: 150,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    childWhenDragging:
-                        Container(), // Hide the original text while dragging
-                    onDraggableCanceled: (velocity, offset) {
-                      // Handle when dragging is canceled
-                    },
+                      SizedBox(height: 36 * fem),
+                      DateDisplay(selectedDate: selectedDate),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: _buildDays(fem),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
+
             Positioned(
-              // rectangle10Gpd (24:28)
-              left: 0 * fem,
-              top: 206 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 430 * fem,
-                  height: 726 * fem,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40 * fem),
-                      color: Color(0xff585a79),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // novemberBAu (24:29)
               left: 20 * fem,
-              top: 220 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 130 * fem,
-                  height: 36 * fem,
-                  child: Text(
-                    'November',
-                    style: SafeGoogleFont(
-                      'Poppins',
-                      fontSize: 24 * ffem,
-                      fontWeight: FontWeight.w700,
-                      height: 1.5 * ffem / fem,
-                      color: Color(0xffffffff),
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // rectangle11s3j (24:30)
-              left: 17 * fem,
-              top: 269 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 75 * fem,
-                  height: 97 * fem,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25 * fem),
-                      color: Color(0xff3f405b),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0x3f000000),
-                          offset: Offset(0 * fem, 4 * fem),
-                          blurRadius: 2 * fem,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // rectangle12xL5 (24:34)
-              left: 109 * fem,
-              top: 269 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 75 * fem,
-                  height: 97 * fem,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25 * fem),
-                      color: Color(0xff3f405b),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0x3f000000),
-                          offset: Offset(0 * fem, 4 * fem),
-                          blurRadius: 2 * fem,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // rectangle13SFF (24:35)
-              left: 200 * fem,
-              top: 269 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 75 * fem,
-                  height: 97 * fem,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25 * fem),
-                      color: Color(0xff3f405b),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0x3f000000),
-                          offset: Offset(0 * fem, 4 * fem),
-                          blurRadius: 2 * fem,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // rectangle14vRK (24:36)
-              left: 293 * fem,
-              top: 269 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 75 * fem,
-                  height: 97 * fem,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25 * fem),
-                      color: Color(0xffe1d45e),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0x3f000000),
-                          offset: Offset(0 * fem, 4 * fem),
-                          blurRadius: 2 * fem,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // rectangle15cJ9 (24:43)
-              left: 382 * fem,
-              top: 269 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 75 * fem,
-                  height: 97 * fem,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25 * fem),
-                      color: Color(0xffd9d9d9),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0x3f000000),
-                          offset: Offset(0 * fem, 4 * fem),
-                          blurRadius: 2 * fem,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // 6UD (24:45)
-              left: 50 * fem,
-              top: 296 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 8 * fem,
-                  height: 30 * fem,
-                  child: Text(
-                    '1',
-                    style: SafeGoogleFont(
-                      'Poppins',
-                      fontSize: 20 * ffem,
-                      fontWeight: FontWeight.w700,
-                      height: 1.5 * ffem / fem,
-                      color: Color(0xffffffff),
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // monzZb (24:39)
-              left: 27 * fem,
-              top: 269 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 54 * fem,
-                  height: 36 * fem,
-                  child: Text(
-                    'Mon',
-                    style: SafeGoogleFont(
-                      'Poppins',
-                      fontSize: 24 * ffem,
-                      fontWeight: FontWeight.w700,
-                      height: 1.5 * ffem / fem,
-                      color: Color(0xffffffff),
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // tQ5 (24:46)
-              left: 141 * fem,
-              top: 296 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 12 * fem,
-                  height: 30 * fem,
-                  child: Text(
-                    '2',
-                    style: SafeGoogleFont(
-                      'Poppins',
-                      fontSize: 20 * ffem,
-                      fontWeight: FontWeight.w700,
-                      height: 1.5 * ffem / fem,
-                      color: Color(0xffffffff),
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // aXo (24:47)
-              left: 231 * fem,
-              top: 296 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 13 * fem,
-                  height: 30 * fem,
-                  child: Text(
-                    '3',
-                    style: SafeGoogleFont(
-                      'Poppins',
-                      fontSize: 20 * ffem,
-                      fontWeight: FontWeight.w700,
-                      height: 1.5 * ffem / fem,
-                      color: Color(0xffffffff),
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // Hh7 (24:48)
-              left: 325 * fem,
-              top: 296 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 14 * fem,
-                  height: 30 * fem,
-                  child: Text(
-                    '4',
-                    style: SafeGoogleFont(
-                      'Poppins',
-                      fontSize: 20 * ffem,
-                      fontWeight: FontWeight.w700,
-                      height: 1.5 * ffem / fem,
-                      color: Color(0xffffffff),
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // nds (24:49)
-              left: 412 * fem,
-              top: 295 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 13 * fem,
-                  height: 30 * fem,
-                  child: Text(
-                    '5',
-                    style: SafeGoogleFont(
-                      'Poppins',
-                      fontSize: 20 * ffem,
-                      fontWeight: FontWeight.w700,
-                      height: 1.5 * ffem / fem,
-                      color: Color(0xffffffff),
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // tues5cy (24:40)
-              left: 117 * fem,
-              top: 269 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 59 * fem,
-                  height: 36 * fem,
-                  child: Text(
-                    'Tues',
-                    style: SafeGoogleFont(
-                      'Poppins',
-                      fontSize: 24 * ffem,
-                      fontWeight: FontWeight.w700,
-                      height: 1.5 * ffem / fem,
-                      color: Color(0xffffffff),
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // thuraZj (24:41)
-              left: 304 * fem,
-              top: 269 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 55 * fem,
-                  height: 35 * fem,
-                  child: Text(
-                    'Thur',
-                    style: SafeGoogleFont(
-                      'Poppins',
-                      fontSize: 23 * ffem,
-                      fontWeight: FontWeight.w700,
-                      height: 1.5 * ffem / fem,
-                      color: Color(0xffffffff),
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // frit4d (24:44)
-              left: 393 * fem,
-              top: 269 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 30 * fem,
-                  height: 35 * fem,
-                  child: Text(
-                    'Fri',
-                    style: SafeGoogleFont(
-                      'Poppins',
-                      fontSize: 23 * ffem,
-                      fontWeight: FontWeight.w700,
-                      height: 1.5 * ffem / fem,
-                      color: Color(0xffffffff),
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // wedBpR (24:42)
-              left: 209 * fem,
-              top: 269 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 54 * fem,
-                  height: 35 * fem,
-                  child: Text(
-                    'Wed',
-                    style: SafeGoogleFont(
-                      'Poppins',
-                      fontSize: 23 * ffem,
-                      fontWeight: FontWeight.w700,
-                      height: 1.5 * ffem / fem,
-                      color: Color(0xffffffff),
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // back6gV (24:38)
-              left: 3 * fem,
-              top: 18 * fem,
-              child: Align(
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop(); // Navigate back when tapped
-                  },
-                  child: SizedBox(
-                    width: 46 * fem,
-                    height: 42 * fem,
-                    child: Image.asset(
-                      'assets/page-1/images/back-MGZ.png',
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // slightlysmilingfaceRCy (24:50)
-              left: 36 * fem,
-              top: 319 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 37 * fem,
-                  height: 31 * fem,
-                  child: Image.asset(
-                    'assets/page-1/images/slightly-smiling-face-VPb.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // slightlysmilingfaceYHb (24:61)
-              left: 314 * fem,
-              top: 325 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 37 * fem,
-                  height: 31 * fem,
-                  child: Image.asset(
-                    'assets/page-1/images/slightly-smiling-face.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // frowningfacerp5 (24:51)
-              left: 128 * fem,
-              top: 323 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 37 * fem,
-                  height: 31 * fem,
-                  child: Image.asset(
-                    'assets/page-1/images/frowning-face.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // angryfaceazy (24:52)
-              left: 212 * fem,
-              top: 323 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 51 * fem,
-                  height: 30 * fem,
-                  child: Image.asset(
-                    'assets/page-1/images/angry-face.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // rectangle16unM (24:55)
-              left: 0 * fem,
-              top: 390 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 445 * fem,
-                  height: 554 * fem,
-                  child: Image.asset(
-                    'assets/page-1/images/rectangle-16.png',
-                    width: 445 * fem,
-                    height: 554 * fem,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // whatareyourfeelingstoday14h (24:57)
-              left: 20 * fem,
-              top: 417 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 280 * fem,
-                  height: 108 * fem,
-                  child: Text(
-                    'What are your feelings \ntoday?',
-                    style: SafeGoogleFont(
-                      'Poppins',
-                      fontSize: 24 * ffem,
-                      fontWeight: FontWeight.w700,
-                      height: 1.5 * ffem / fem,
-                      color: Color(0xff3f405b),
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // rectangle17rb7 (24:58)
-              left: 17 * fem,
-              top: 510 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 395 * fem,
-                  height: 334 * fem,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20 * fem),
-                      color: Color(0xffd3d3d3),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0x3f000000),
-                          offset: Offset(0 * fem, 4 * fem),
-                          blurRadius: 2 * fem,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // todaythemorningsunandlaughterw (24:60)
-              left: 26 * fem,
-              top: 550 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 371 * fem,
-                  height: 245 * fem,
-                  child: Text(
-                    'Today, the morning sun and laughter with friends made every moment a celebration of joy. An afternoon walk in the park turned ordinary steps into a dance of gratitude for life\'s small wonders. As the day ends, I reflect on the happiness found in simplicity, grateful for the smiles and warmth that defined the day.',
-                    style: SafeGoogleFont(
-                      'Poppins',
-                      fontSize: 16 * ffem,
-                      fontWeight: FontWeight.w300,
-                      height: 2.1875 * ffem / fem,
-                      color: Color(0xff000000),
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // slightlysmilingfacetAR (24:59)
-              left: 365 * fem,
-              top: 520 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 36 * fem,
-                  height: 31 * fem,
-                  child: Image.asset(
-                    'assets/page-1/images/slightly-smiling-face-8fP.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-            ),
-            Positioned(
-              // addnewnWh (56:5)
-              left: 325 * fem,
-              top: 780 * fem,
-              child: Align(
-                child: SizedBox(
-                  width: 80 * fem,
-                  height: 50 * fem,
-                  child: Image.asset(
-                    'assets/page-1/images/add-new-RUR.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
+              top: 275 * fem,
+              child: _buildJournalEntry(selectedDate, fem),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  List<Widget> _buildDays(double fem) {
+    List<Widget> days = [];
+
+    DateTime firstDayOfMonth =
+        DateTime(selectedDate!.year, selectedDate!.month, 1);
+
+    for (int i = 0;
+        i < DateTime(selectedDate!.year, selectedDate!.month + 1, 0).day;
+        i++) {
+      DateTime day = firstDayOfMonth.add(Duration(days: i));
+
+      days.add(_buildDayWidget(day, fem));
+    }
+
+    return days;
+  }
+
+  Widget _buildDayWidget(DateTime day, double fem) {
+    bool hasJournalEntry = journalEntriesMap.containsKey(day);
+    String? emoji =
+        journalEntriesMap[day]?.emoji; // Change IconData? to String?
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15 * fem),
+      child: GestureDetector(
+        onTap: () => _showJournalEntryDialog(day),
+        child: Column(
+          children: [
+            Text(
+              DateFormat.E().format(day),
+              style: TextStyle(
+                fontSize: 20 * fem,
+                fontWeight: FontWeight.w700,
+                color: Colors.black,
+              ),
+            ),
+            SizedBox(height: 5 * fem),
+            Text(
+              day.day.toString(),
+              style: TextStyle(
+                fontSize: 26 * fem,
+                fontWeight: FontWeight.w700,
+                color: Colors.black,
+              ),
+            ),
+            if (hasJournalEntry && emoji != null)
+              Image.asset(
+                emoji, // Assuming emoji is the path to your PNG image
+                width: 34, // Adjust the width as needed
+                height: 34, // Adjust the height as needed
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildJournalEntry(DateTime? day, double fem) {
+    JournalEntry? entry = day != null ? journalEntriesMap[day] : null;
+
+    return GestureDetector(
+      onTap: () => _editJournalEntry(day),
+      child: Container(
+        width: 380 * fem,
+        height: 500 * fem,
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Color(0xffFEE3D2),
+          borderRadius: BorderRadius.circular(40),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Journal Entry for ${entry?.date ?? ""}',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            SizedBox(height: 12),
+            Text(
+              entry?.entry ?? "",
+              style: TextStyle(
+                fontSize: 18, // Adjust the font size as needed
+              ),
+            ),
+            SizedBox(height: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showJournalEntryDialog(DateTime day) {
+    setState(() {
+      selectedDate = day;
+    });
+  }
+
+  void _editJournalEntry(DateTime? day) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Journal Entry for ${DateFormat.yMMMMd().format(day!)}"),
+          content: Column(
+            children: [
+              Text("Select Emoji for Emotion:"),
+              SizedBox(height: 10),
+              _buildEmojiPicker(),
+              SizedBox(height: 10),
+              TextField(
+                controller: noteController,
+                maxLines: 3,
+                decoration: InputDecoration(
+                  hintText: "Write your journal entry here...",
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  selectedEmoji = null;
+                });
+                Navigator.pop(context);
+              },
+              child: Text("Cancel"),
+            ),
+            TextButton(
+              onPressed: () {
+                _addJournalEntry(day, noteController.text, selectedEmoji);
+                noteController.clear();
+                Navigator.pop(context);
+              },
+              child: Text("Save"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildEmojiPicker() {
+    return Wrap(
+      spacing: 10,
+      children: [
+        _buildEmojiIcon('assets/images/angry-cat.png'),
+        _buildEmojiIcon('assets/images/happy-cat.png'),
+        _buildEmojiIcon('assets/images/Love-cat.png'),
+        _buildEmojiIcon('assets/images/sad-cat.png'),
+      ],
+    );
+  }
+
+  Widget _buildEmojiIcon(String imagePath) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedEmoji = imagePath;
+        });
+      },
+      child: Image.asset(
+        imagePath,
+        width: 30,
+        height: 30,
+      ),
+    );
+  }
+
+  void _addJournalEntry(DateTime day, String entry, String? emoji) {
+    JournalEntry newEntry = JournalEntry(
+      day: DateFormat.E().format(day),
+      date: DateFormat.yMMMMd().format(day),
+      entry: entry,
+      emoji: emoji,
+    );
+
+    setState(() {
+      journalEntriesMap[day] = newEntry;
+    });
+  }
+}
+
+class JournalEntry {
+  final String day;
+  final String date;
+  final String entry;
+  final String? emoji; // Change IconData? to String?
+
+  JournalEntry(
+      {required this.day, required this.date, required this.entry, this.emoji});
+}
+
+class DateDisplay extends StatelessWidget {
+  final DateTime? selectedDate;
+
+  DateDisplay({required this.selectedDate});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      '${DateFormat.MMMM().format(selectedDate!)}',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        fontSize: 34,
+        fontWeight: FontWeight.w700,
+        color: Color(0xff585A79),
       ),
     );
   }

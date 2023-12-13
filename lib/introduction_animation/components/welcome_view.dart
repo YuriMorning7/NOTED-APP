@@ -1,4 +1,4 @@
-import 'package:best_flutter_ui_templates/navigation_home_screen.dart';
+import 'package:Noted_Inc/navigation_home_screen.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeView extends StatelessWidget {
